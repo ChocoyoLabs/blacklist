@@ -12,4 +12,19 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//= require jquery3
+//= require popper
+//= require bootstrap-sprockets
 //= require_tree .
+
+var ready = function() {
+    $('#search').bootcomplete({
+        url: '/search'
+    });
+};
+
+document.addEventListener("turbolinks:load", function() {
+    ready();
+});
+
+ready();

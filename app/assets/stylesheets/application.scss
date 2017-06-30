@@ -13,3 +13,32 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+body {
+  background-color: #3b5998;
+}
+
+.row-margin {
+  margin-top: 12px;
+}
+
+.user-item {
+  padding: 12px;
+  background-color: #e9ebee;
+}
+
+.divider {
+  height: 12px;
+}
+
+.center {
+  text-align: center;
+}
+
+.btn {
+  cursor: pointer !important;
+}

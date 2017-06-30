@@ -1,0 +1,65 @@
+<div class="row row-margin">
+  <div class="col-md-4 offset-md-4">
+    <div class="media user-item">
+      <img class="d-flex align-self-start mr-3" src="<%= @picture %>" alt="Generic placeholder image">
+      <div class="media-body">
+        <h5 class="mt-0"><%= @profile['name'] %></h5>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <% if @user.present? %>
+        <div class="alert alert-danger center" role="alert">
+          <strong>Este usuario ya fué reportado.</strong>
+        </div>
+    <% else %>
+        <div class="center">
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#reportModal">
+            <%= icon('ban', class: 'strong') %> Reportar a <%= @profile['name'] %>
+          </button>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="row row-margin">
+  <div class="col-md-4 offset-md-4">
+    <%= render 'layouts/message' %>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal modal- fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">Reportar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form method="post" action="/report">
+        <div class="modal-body center">
+          <p>¿Deseas reportar a <%= @profile['name'] %>?</p>
+
+          <%= hidden_field_tag :name, @profile['name'] %>
+          <%= hidden_field_tag :uid, @uid %>
+
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+          <div class="form-group">
+            <label for="recipient-name" class="form-control-label">Contraseña:</label>
+            <input type="text" name="code" class="form-control" id="recipient-name">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">
+            <%= icon('floppy-o', class: 'strong') %> Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
